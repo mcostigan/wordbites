@@ -9,6 +9,6 @@ import javax.swing.JPanel
 class TilePanel(private var tile: Tile) : JPanel() {
     init {
         this.add(JLabel(tile.getLetter().toString()))
-        this.border = BorderFactory.createDashedBorder(Color.BLACK)
+        this.background = Color.GRAY
     }
 }

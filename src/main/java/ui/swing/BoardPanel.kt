@@ -1,10 +1,10 @@
 package ui.swing
 
 import game.Game
+import java.awt.Graphics
 import java.awt.event.MouseEvent
 import java.awt.event.MouseListener
 import java.awt.event.MouseMotionListener
-import java.lang.Integer.min
 import javax.swing.JPanel
 
 class BoardPanel(private var game: Game) : JPanel() {
@@ -29,6 +29,23 @@ class BoardPanel(private var game: Game) : JPanel() {
             it.x <= x && it.x + it.width >= x && it.y <= y && it.y + it.height >= y
         } ?: return null
         return PickedUpPiece(piece, Pair(x - piece.x, y - piece.y))
+    }
+
+    override fun paintComponent(g: Graphics) {
+        super.paintComponent(g)
+        val d = game.getDimensions()
+        val rows = d.first
+        val cols = d.second
+        for (row in 0..rows){
+            val pos = row*squareSize
+            g.drawLine(0, pos, this.squareSize*cols, pos)
+        }
+
+        for (col in 0..cols){
+            val pos = col*squareSize
+            g.drawLine(pos, 0, pos, this.squareSize*rows)
+        }
+
     }
 
 }
